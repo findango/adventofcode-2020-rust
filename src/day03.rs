@@ -31,9 +31,7 @@ fn count_trees(map: &Map, dx: usize, dy: usize) -> usize {
     let mut y = 0;
     let mut count = 0;
     while y < map.len() {
-        if map[y][x % width] == '#' {
-            count += 1;
-        }
+        count += if map[y][x % width] == '#' { 1 } else { 0 };
         x += dx;
         y += dy;
     }
