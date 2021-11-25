@@ -1,7 +1,7 @@
 #![allow(dead_code)]
 
-// use log::*;
 use regex::Regex;
+use std::fs::read_to_string;
 
 #[derive(Debug)]
 struct Password {
@@ -27,6 +27,11 @@ fn parse(input: &str) -> Vec<Password> {
         .collect()
 }
 
+fn load_input(filename: &str) -> Vec<Password> {
+    let input = read_to_string(filename).unwrap();
+    parse(&input)
+}
+
 fn nth(s: &String, n: usize) -> char {
     s.chars().nth(n).unwrap()
 }
@@ -49,7 +54,6 @@ const EXAMPLE: &str = "1-3 a: abcde
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::fs::read_to_string;
 
     #[test]
     fn example_1() {
@@ -67,16 +71,14 @@ mod tests {
 
     #[test]
     fn part_1() {
-        let input = read_to_string("input/input02.txt").unwrap();
-        let pwds = parse(&input);
+        let pwds = load_input("input/input02.txt");
         let goods = pwds.iter().filter(validate);
         assert_eq!(536, goods.count());
     }
 
     #[test]
     fn part_2() {
-        let input = read_to_string("input/input02.txt").unwrap();
-        let pwds = parse(&input);
+        let pwds = load_input("input/input02.txt");
         let goods = pwds.iter().filter(validate2);
         assert_eq!(558, goods.count());
     }
