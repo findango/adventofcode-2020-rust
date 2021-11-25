@@ -7,5 +7,6 @@ license="MIT"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+indoc = "1.0.3"
 itertools = "0.10.1"
 regex = "1.5.4"

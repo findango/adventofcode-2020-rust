@@ -1,5 +1,6 @@
 #![allow(dead_code)]
 
+use indoc::indoc;
 use regex::Regex;
 use std::fs::read_to_string;
 
@@ -47,9 +48,11 @@ fn validate2(p: &&Password) -> bool {
     (ca == p.letter || cb == p.letter) && ca != cb
 }
 
-const EXAMPLE: &str = "1-3 a: abcde
-1-3 b: cdefg
-2-9 c: ccccccccc";
+const EXAMPLE: &str = indoc! {"
+    1-3 a: abcde
+    1-3 b: cdefg
+    2-9 c: ccccccccc
+"};
 
 #[cfg(test)]
 mod tests {
