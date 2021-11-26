@@ -4,8 +4,10 @@
 #![allow(dead_code)]
 
 use itertools::Itertools;
+use std::fs::read_to_string;
 
-fn parse(input: &str) -> Vec<i32> {
+fn load_input(filename: &str) -> Vec<i32> {
+    let input = read_to_string(filename).unwrap();
     input.lines().map(|l| l.parse().unwrap()).collect()
 }
 
@@ -23,7 +25,6 @@ where
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::fs::read_to_string;
 
     #[test]
     fn example_1() {
@@ -41,15 +42,14 @@ mod tests {
 
     #[test]
     fn part_1() {
-        let input = read_to_string("input/input01.txt").unwrap();
-        let list = parse(&input);
+        let list = load_input("input/input01.txt");
         let pair = find_combo(2, &list, |xs| xs[0] + xs[1] == 2020);
         assert_eq!(pair[0] * pair[1], 1015476);
     }
+
     #[test]
     fn part_2() {
-        let input = read_to_string("input/input01.txt").unwrap();
-        let list = parse(&input);
+        let list = load_input("input/input01.txt");
         let triplet = find_combo(3, &list, |xs| xs[0] + xs[1] + xs[2] == 2020);
         assert_eq!(triplet[0] * triplet[1] * triplet[2], 200878544);
     }
